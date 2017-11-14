@@ -142,8 +142,9 @@ salt_master_install() {
     echo -n 'Checking out cloud-init was completed ...'
     while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo -n '.'; sleep 1; done
     echo ' done'
-    apt install -y subversion
-    mkdir /srv/salt /srv/salt/reclass/nodes /srv/salt/reclass/classes/cluster
+    #mkdir /srv/salt /srv/salt/reclass/nodes /srv/salt/reclass/classes/cluster
+    git clone  https://github.com/dandrushko/kube-deploy.git /srv/salt
+    git clone https://github.com/salt-formulas/salt-formulas-scripts /srv/salt/scripts	
     #svn export --force https://github.com/salt-formulas/salt-formulas-scripts/trunk /srv/salt/scripts
     git clone https://github.com/salt-formulas/salt-formulas-scripts /srv/salt/scripts
     git clone https://github.com/Mirantis/reclass-system-salt-model /srv/salt/reclass/classes/system
