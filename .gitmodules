@@ -1,6 +1,8 @@
 [submodule "reclass/classes/system"]
 	path = reclass/classes/system
 	url = https://github.com/Mirantis/reclass-system-salt-model
+	branch = master
+	ignore = all
 [submodule "scripts"]
 	path = scripts
 	url = https://github.com/salt-formulas/salt-formulas-scripts
