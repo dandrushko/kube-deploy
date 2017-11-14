@@ -6,7 +6,7 @@ export SALT_MASTER="192.168.10.100"
 export BASE_IMAGE="https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img"
 export SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${SSH_KEY}"
 export VNODES=('cfg01' 'kube01' 'kube02')
-export CLUSTER_DOMAIN="kube.local"
+export CLUSTER_DOMAIN="kube-deploy.local"
 export vnodes_ram=(["cfg01"]="4096" ["kube01"]="4096" ["kube02"]="4096")
 export vnodes_vcpus=(["cfg01"]="2" ["kube01"]="2" ["kube02"]="2")
 
@@ -143,10 +143,15 @@ salt_master_install() {
     while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo -n '.'; sleep 1; done
     echo ' done'
     apt install -y subversion
-    mkdir /srv/salt
-    svn export --force https://github.com/salt-formulas/salt-formulas-scripts/trunk /srv/salt/scripts
+    mkdir /srv/salt /srv/salt/reclass/nodes /srv/salt/reclass/classes/cluster
+    #svn export --force https://github.com/salt-formulas/salt-formulas-scripts/trunk /srv/salt/scripts
+    git clone https://github.com/salt-formulas/salt-formulas-scripts /srv/salt/scripts
     git clone https://github.com/Mirantis/reclass-system-salt-model /srv/salt/reclass/classes/system
+    #  Upload cfg01 node model + reclass cluster model
+    
+    #
     cd /srv/salt/scripts
+
     BOOTSTRAP_SALTSTACK_OPTS=" -r -dX stable 2016.11 " \
       MASTER_HOSTNAME=cfg01.${CLUSTER_DOMAIN} DISTRIB_REVISION=nightly \
         ./salt-master-init.sh
@@ -164,7 +169,7 @@ start_deployment(){
     start_vms
     check_connection
     ### Assuming infra deployed at this point
-    salt_master_install
+    #salt_master_install
 }
 
 
