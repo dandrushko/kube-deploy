@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 [submodule "reclass/classes/system"]
-=======
-[submodule "reclass-system-salt-model"]
->>>>>>> 3d6c287e54d743dffbaa16adf2c178d332ac43ac
 	path = reclass/classes/system
 	url = https://github.com/Mirantis/reclass-system-salt-model
 	branch = master
