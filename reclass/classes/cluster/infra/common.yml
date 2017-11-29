@@ -1,0 +1,37 @@
+classes:
+  - service.git.client
+  - system.linux.system.single
+  - system.linux.system.repo.docker
+  - system.linux.system.repo.mcp.salt
+  - system.docker.client
+  - system.docker.host
+parameters:
+  _param:
+    salt_master_host: 192.168.10.100
+    salt_master_base_environment: prd
+    salt_minion_ca_host: cfg01.kube-deploy.local
+    cluster_domain: kube-deploy.local
+    salt_api_password_hash: "$6$sGnRlxGf$al5jMCetLP.vfI/fTl3Z0N7Za1aeiexL487jAtyRABVfT3NlwZxQGVhO7S1N8OwS/34VHYwZQA8lkXwKMN/GS1"
+    linux_system_codename: xenial
+    cluster_vip_address: 172.16.10.104
+    cluster_public_host: 172.16.10.104
+  docker:
+    host:
+      enabled: true
+  linux:
+    system:
+      enabled: true
+      user:
+        ubuntu:
+          enabled: true
+          sudo: true
+          home: /home/ubuntu
+    network:
+      interface:
+        single_int:
+          enabled: true
+          name: ens4
+          type: eth
+          proto: static
+#          address: 172.16.10.100
+#          netmask: 255.255.255.0

@@ -4,7 +4,7 @@ parameters:
   _param:
     linux_system_codename: xenial
     reclass_data_revision: master
-linux:
+  linux:
     system:
       name: cfg01
       domain: kube-deploy.local
